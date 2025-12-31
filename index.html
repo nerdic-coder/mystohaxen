@@ -5,13 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mystohaxen - Electronic Artist</title>
     <style>
+        :root {
+            --bg: #0a0a0a;
+            --panel: rgba(18, 18, 18, 0.9);
+            --accent: #ff2e2e;
+            --accent-soft: rgba(255, 46, 46, 0.35);
+            --text: #e6e6e6;
+        }
+
         body {
             margin: 0;
             padding: 0;
-            background-color: #0a0a0a;
-            color: #e0e0e0;
-            font-family: 'Arial', sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: "Trebuchet MS", "Segoe UI", sans-serif;
             line-height: 1.6;
+            background-image: radial-gradient(circle at 10% 10%, rgba(255, 46, 46, 0.15), transparent 45%),
+                radial-gradient(circle at 90% 20%, rgba(255, 255, 255, 0.05), transparent 40%),
+                linear-gradient(120deg, rgba(255, 46, 46, 0.06), transparent 50%);
         }
         
         .container {
@@ -25,26 +36,26 @@
         header {
             text-align: center;
             padding: 60px 0;
-            background: linear-gradient(45deg, #1a1a1a, #2a2a2a);
-            border-bottom: 2px solid #3a3a3a;
+            background: linear-gradient(45deg, #0d0d0d, #1f1f1f);
+            border-bottom: 2px solid #2e2e2e;
         }
         
         .artist-name {
             font-size: min(4em, 8vw);
-            color: #00ff9d;
+            color: var(--accent);
             text-transform: uppercase;
             letter-spacing: 8px;
             margin: 0;
-            text-shadow: 0 0 10px rgba(0, 255, 157, 0.5);
+            text-shadow: 0 0 14px rgba(255, 46, 46, 0.6);
         }
         
         .main-image {
             width: 100%;
             max-width: 640px;
             margin: 40px auto;
-            background-color: #2a2a2a;
-            border: 2px solid #00ff9d;
-            box-shadow: 0 0 20px rgba(0, 255, 157, 0.3);
+            background-color: #1f1f1f;
+            border: 2px solid var(--accent);
+            box-shadow: 0 0 20px var(--accent-soft);
         }
 
         .main-image img {
@@ -57,9 +68,23 @@
             max-width: 800px;
             margin: 40px auto;
             padding: 20px;
-            background: rgba(26, 26, 26, 0.8);
+            background: var(--panel);
             border-radius: 10px;
-            border: 1px solid #3a3a3a;
+            border: 1px solid #2f2f2f;
+        }
+
+        .youtube-section {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .youtube-section::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            border: 1px solid rgba(255, 46, 46, 0.3);
+            border-radius: 10px;
+            pointer-events: none;
         }
         
         .social-links {
@@ -72,18 +97,18 @@
         }
         
         .social-link {
-            color: #00ff9d;
+            color: var(--accent);
             text-decoration: none;
             padding: 10px 20px;
-            border: 1px solid #00ff9d;
+            border: 1px solid var(--accent);
             border-radius: 5px;
             transition: all 0.3s ease;
         }
         
         .social-link:hover {
-            background-color: #00ff9d;
+            background-color: var(--accent);
             color: #0a0a0a;
-            box-shadow: 0 0 15px rgba(0, 255, 157, 0.5);
+            box-shadow: 0 0 15px var(--accent-soft);
         }
         
         footer {
@@ -97,20 +122,62 @@
             max-width: 800px;
             margin: 40px auto;
             padding: 20px;
-            background: rgba(26, 26, 26, 0.8);
+            background: var(--panel);
             border-radius: 10px;
-            border: 1px solid #3a3a3a;
+            border: 1px solid #2f2f2f;
             text-align: center;
         }
 
         .email-link {
-            color: #00ff9d;
+            color: var(--accent);
             text-decoration: none;
             transition: all 0.3s ease;
         }
 
         .email-link:hover {
-            text-shadow: 0 0 10px rgba(0, 255, 157, 0.5);
+            text-shadow: 0 0 10px var(--accent-soft);
+        }
+
+        .youtube-cta {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+            margin-top: 16px;
+        }
+
+        .cta-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px 22px;
+            border-radius: 999px;
+            text-decoration: none;
+            font-weight: 700;
+            letter-spacing: 1px;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .cta-primary {
+            background: var(--accent);
+            color: #0a0a0a;
+            box-shadow: 0 0 14px var(--accent-soft);
+        }
+
+        .cta-secondary {
+            border: 1px solid var(--accent);
+            color: var(--accent);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+        }
+
+        .youtube-frame {
+            width: 100%;
+            height: 360px;
+            border: none;
+            border-radius: 12px;
+            margin-top: 20px;
         }
     </style>
 </head>
@@ -125,9 +192,14 @@
              <img src="MYSTOHAXEN.JPEG" alt="Could be the Mystohaxen"/>
         </div>
 
-        <div class="about-section">
-            <h2>Spotify profile</h2>
-            <iframe style="border-radius:12px" src="https://open.spotify.com/embed/artist/7kvgYOMBmLm1KYxDOBRuHF?utm_source=generator&theme=0" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+        <div class="about-section youtube-section">
+            <h2>YouTube Channel</h2>
+            <p>New uploads, studio clips, and full visualizers live on YouTube. Catch the latest drops and behind-the-scenes sessions there first.</p>
+            <div class="youtube-cta">
+                <a href="https://www.youtube.com/@mystohaxen" class="cta-button cta-primary" target="_blank" rel="noreferrer">Watch on YouTube</a>
+                <a href="https://www.youtube.com/@mystohaxen?sub_confirmation=1" class="cta-button cta-secondary" target="_blank" rel="noreferrer">Subscribe</a>
+            </div>
+            <iframe class="youtube-frame" src="https://www.youtube.com/embed?listType=user_uploads&list=mystohaxen" title="Mystohaxen uploads" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
         </div>
         <div class="about-section">
             <h2>About</h2>
@@ -135,9 +207,9 @@
         </div>
         
         <div class="social-links">
-            <a href="https://open.spotify.com/artist/7kvgYOMBmLm1KYxDOBRuHF" class="social-link" target="_blank">Spotify</a>
             <a href="https://www.youtube.com/@mystohaxen" class="social-link" target="_blank">Youtube</a>
             <a href="https://www.tiktok.com/@mystohaxen" class="social-link" target="_blank">TikTok</a>
+            <a href="https://open.spotify.com/artist/7kvgYOMBmLm1KYxDOBRuHF" class="social-link" target="_blank">Spotify</a>
         </div>
 
         <div class="contact-section">
